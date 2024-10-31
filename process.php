@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <?php
-        session_start(); // Mulai session
+        session_start(); 
         // Koneksi ke database
         $conn = new mysqli("localhost", "root", "", "Rental_Mobil");
 
@@ -65,7 +65,8 @@
               $stmt->bind_param('ssisdddd', $nama_penyewa, $mobil, $durasi_sewa, $program, $biaya_dasar, $diskon, $biaya_tambahan, $total_biaya);
 
               if ($stmt->execute()) {
-                  echo "<p></p>";
+                header("Location: " . $_SERVER['PHP_SELF']);
+                exit;
               } else {
                   echo "<p>Terjadi kesalahan saat menyimpan data: " . $stmt->error . "</p>";
               }
@@ -80,48 +81,38 @@
 $sql = "SELECT * FROM t_sewa";
 $result = $conn->query($sql);
 
-        echo "<h2>Rincian Biaya Rental</h2>";
-        echo "<table border='1' cellpadding='10' cellspacing='0'>";
-        echo "<tr>
-                <th>No</th>
-                <th>Nama Penyewa</th>
-                <th>Nama Mobil</th>
-                <th>Program</th>
-                <th>Lama Sewa (Hari)</th>
-                <th>Paket 1</th>
-                <th>Paket 2</th>
-                <th>Paket 3</th>
-                <th>Harian</th>
-                <th>Extra/hour</th>
-                <th>Total Biaya</th>
-              </tr>";
-        
-        $no = 1; // Nomor urut
-        
-        // Hitung biaya untuk setiap paket
-        $biaya_paket_1 = $biaya_per_hari * 4 * (1 - 0.1); // Paket 1 dengan diskon 10%
-        $biaya_paket_2 = $biaya_per_hari * 7 * (1 - 0.2); // Paket 2 dengan diskon 20%
-        $biaya_paket_3 = $biaya_per_hari * 10 * (1 - 0.25); // Paket 3 dengan diskon 25%
-        $biaya_harian = $biaya_per_hari; // Biaya harian
-        $biaya_extra = $biaya_per_jam * $jam_tambahan; 
+echo "<h2>Rincian Biaya Rental</h2>";
+echo "<table border='1' cellpadding='10' cellspacing='0'>";
+echo "<tr>
+        <th>No</th>
+        <th>Nama Penyewa</th>
+        <th>Nama Mobil</th>
+        <th>Durasi Sewa (Hari)</th>
+        <th>Program</th>
+        <th>Biaya Dasar</th>
+        <th>Diskon</th>
+        <th>Biaya Tambahan</th>
+        <th>Total Biaya</th>
+      </tr>";
+
+// $no = 1; // Nomor urut
+
 while ($row = $result->fetch_assoc()) {
-        
-        echo "<tr>
-                <td>$no</td>
-                <td>$nama_penyewa</td>
-                <td>$mobil</td>
-                <td>$program</td>
-                <td>$durasi_sewa</td>
-                <td>Rp " . number_format($biaya_paket_1, 0, ',', '.') . "</td>
-                <td>Rp " . number_format($biaya_paket_2, 0, ',', '.') . "</td>
-                <td>Rp " . number_format($biaya_paket_3, 0, ',', '.') . "</td>
-                <td>Rp " . number_format($biaya_harian, 0, ',', '.') . "</td>
-                <td>Rp " . number_format($biaya_extra, 0, ',', '.') . "</td>
-                <td>Rp " . number_format($total_biaya, 0, ',', '.') . "</td>
-              </tr>";
-        $no++;
+    echo "<tr>
+            <td>{$row['id']}</td>
+            <td>{$row['nama_penyewa']}</td>
+            <td>{$row['mobil']}</td>
+            <td>{$row['durasi_sewa']}</td>
+            <td>{$row['program']}</td>
+            <td>Rp " . number_format($row['biaya_dasar'], 0, ',', '.') . "</td>
+            <td>Rp " . number_format($row['diskon'], 0, ',', '.') . "</td>
+            <td>Rp " . number_format($row['biaya_tambahan'], 0, ',', '.') . "</td>
+            <td>Rp " . number_format($row['total_biaya'], 0, ',', '.') . "</td>
+          </tr>";
+    // $no++;
 }
-        echo "</table>";
+echo "</table>";
+
         
         session_abort();
                 $conn->close();
