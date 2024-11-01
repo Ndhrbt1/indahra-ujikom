@@ -4,34 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Header Berjalan</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
-      .marquee {
-        background-color: #eddc198a;
-        color: white;
-        padding: 10px;
-        font-size: 20px;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-      .marquee-text {
-        display: inline-block;
-        animation: marquee 10s linear infinite; /* Animasi berjalan */
-      }
-      @keyframes marquee {
-        0% {
-          transform: translateX(100%);
-        } /* Mulai dari luar kanan */
-        100% {
-          transform: translateX(-100%);
-        } /* Berhenti di luar kiri */
-      }
-    </style>
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
     <div class="marquee">

@@ -10,12 +10,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to RentCar 🚓</h1>
+    <?php include "layout/header.html"?>
+        <h1>RentCar🚘</h1>
         <form action="result.php" method="POST">
             <label for="nama">Nama Penyewa:</label>
-            <input type="text" placeholder= 'masukan nama kamu'id="nama" name="nama_penyewa" required />
+            <input type="text" placeholder= 'Masukan nama anda'id="nama" name="nama_penyewa" required class="textfield"/>
             <label for="mobil">Pilih Mobil:</label>
-            <select id="mobil" name="mobil" required>
+            <select id="mobil" name="mobil" required class="textfield">
                 <option value="Avanza">Avanza</option>
                 <option value="Innova">Innova</option>
                 <option value="New Altis">New Altis</option>
@@ -23,9 +24,9 @@
                 <option value="Alphard">Alphard</option>
             </select>
             <label for="durasi">Durasi Sewa (hari):</label>
-            <input type="number" id="durasi" name="durasi_sewa" min="1" required oninput="updatePackage()" />
+            <input type="number" id="durasi" name="durasi_sewa" min="1" required oninput="updatePackage()" class="textfield" placeholder="Masukan total durasi"/>
             <label for="jam">Jam Tambahan (jika ada):</label>
-            <input type="number" id="jam" name="jam_tambahan" min="0" value="0" />
+            <input type="number" id="jam" name="jam_tambahan" min="0" value="0" / class="textfield">
             <button type="submit">Hitung Total Biaya</button>
         </form>
         <?php include "layout/footer.html"?>
