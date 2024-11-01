@@ -89,11 +89,11 @@ echo "<tr>
         <th>Total Biaya</th>
       </tr>";
 
-// $no = 1; // Nomor urut
+$no = 1; // Nomor urut
 
 while ($row = $result->fetch_assoc()) {
     echo "<tr>
-            <td>{$row['id']}</td>
+            <td>$no</td>
             <td>{$row['nama_penyewa']}</td>
             <td>{$row['mobil']}</td>
             <td>{$row['durasi_sewa']}</td>
@@ -103,7 +103,7 @@ while ($row = $result->fetch_assoc()) {
             <td>Rp " . number_format($row['biaya_tambahan'], 0, ',', '.') . "</td>
             <td><b>Rp " . number_format($row['total_biaya'], 0, ',', '.') . "</b></td>
           </tr>";
-    // $no++;
+    $no++;
 }
 echo "</table>";
 
